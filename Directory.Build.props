@@ -1,0 +1,27 @@
+<Project>
+	<!-- Configuración de Compilación -->
+	<PropertyGroup Condition="'$(MSBuildProjectName)' != 'Development.Authentications'">
+		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<IsPackable>false</IsPackable>
+
+		<!-- Análisis de código -->
+		<AnalysisLevel>latest</AnalysisLevel>
+		<AnalysisMode>All</AnalysisMode>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+		<CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+	</PropertyGroup>
+
+	<!-- Análisis de Código -->
+	<ItemGroup Condition="'$(MSBuildProjectExtension)' != '.dcproj' 
+                     and '$(MSBuildProjectExtension)' != '.config'
+                     and '$(MSBuildProjectExtension)' != '.props'">
+		<PackageReference Include="SonarAnalyzer.CSharp">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+</Project>

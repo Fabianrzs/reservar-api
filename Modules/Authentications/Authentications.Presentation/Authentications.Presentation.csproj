@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.Google" />
+		<PackageReference Include="Microsoft.Identity.Web" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+    <ProjectReference Include="..\Authentications.Application\Authentications.Application.csproj" />
+    <ProjectReference Include="..\Authentications.Infrastructure\Authentications.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.Infrastructure\Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\..\Common\Common.Presentation\Common.Presentation.csproj" />
+  </ItemGroup>
+</Project>

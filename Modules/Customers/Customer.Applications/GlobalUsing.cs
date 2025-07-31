@@ -1,0 +1,9 @@
+﻿global using Common.Application;
+global using FluentValidation;
+global using Mapster;
+global using Customers.Domain.Entities;
+global using Customers.Domain.ValueObjects;
+global using Common.Application.Messaging;
+global using Common.Domain;
+global using Customers.Domain.Repositories;
+global using Customers.Domain.Errors;

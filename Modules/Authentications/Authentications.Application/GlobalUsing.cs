@@ -1,0 +1,9 @@
+﻿global using Authentications.Domain.Entities;
+global using Authentications.Domain.Enums;
+global using Authentications.Domain.Errors;
+global using Authentications.Domain.Events.Users;
+global using Authentications.Domain.Repositories;
+global using Common.Application.Messaging;
+global using Common.Domain;
+global using FluentValidation;
+global using MediatR;

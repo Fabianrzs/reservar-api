@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+	  <PackageReference Include="Asp.Versioning.Abstractions" />
+	  <PackageReference Include="Asp.Versioning.Http" />
+	  <PackageReference Include="Asp.Versioning.Mvc" />
+	  <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" />
+	<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	<PackageReference Include="Swashbuckle.AspNetCore" />
+	<ProjectReference Include="..\Common.Application\Common.Application.csproj" />
+    <ProjectReference Include="..\Common.Infrastructure\Common.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
