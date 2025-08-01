@@ -9,7 +9,27 @@ namespace Common.Domain;
 /// <typeparam name="TEntity">The type of the entity, derived from <see cref="Entity"/>.</typeparam>
 public interface IRepository<TEntity> where TEntity : Entity
 {
+
     #region Read Operations
+
+    /// <summary>
+    /// Retrieves a paginated list of entities matching the optional filter, with optional includes and ordering.
+    /// </summary>
+    /// <param name="pageNumber">The page number to retrieve (1-based index).</param>
+    /// <param name="pageSize">The number of items per page.</param>
+    /// <param name="predicate">An optional expression to filter the entities.</param>
+    /// <param name="includes">Optional navigation properties to include in the query.</param>
+    /// <param name="orderBy">An optional function to order the query results.</param>
+    /// <param name="cancellationToken">Token to cancel the asynchronous operation.</param>
+    /// <returns>A paged result containing the list of entities and pagination metadata.</returns>
+    Task<PagedResult<TEntity>> PaginateAsync(
+        int pageNumber,
+        int pageSize,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        Expression<Func<TEntity, object>>[]? includes = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+        CancellationToken cancellationToken = default);
+
 
     /// <summary>
     /// Determines whether any entities match the specified predicate.
