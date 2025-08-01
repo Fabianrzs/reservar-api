@@ -7,7 +7,6 @@ public class User : Entity
     public string Email { get; private set; }
     public string? Name { get; private set; }
     public AuthProvider AuthProvider { get; private set; }
-    public bool IsActive { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
     public ICollection<UserRole> Roles { get; private set; } = [];
