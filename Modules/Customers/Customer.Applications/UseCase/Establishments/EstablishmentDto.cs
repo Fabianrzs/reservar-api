@@ -4,6 +4,7 @@ using Customers.Application.UseCase.ContactsInfo;
 namespace Customers.Application.UseCase.Establishments;
 
 public record EstablishmentDto(
+    Guid? Id,
     string Name,
     string Description,
     ContactInfoDto ContactInfo,

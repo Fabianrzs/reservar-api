@@ -27,7 +27,44 @@ public class Repository<TEntity> : IRepository<TEntity>
 
     #region Read Methods
 
-    public virtual async Task<bool> ExistsAsync(
+    public virtual async Task<PagedResult<TEntity>> PaginateAsync(
+        int pageNumber,
+        int pageSize,
+        Expression<Func<TEntity, bool>>? predicate = null,
+        Expression<Func<TEntity, object>>[]? includes = null,
+        Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+        CancellationToken cancellationToken = default)
+    {
+        if (pageNumber <= 0)  {  pageNumber = 1; }
+
+        if (pageSize <= 0) { pageSize = 10; }
+
+        IQueryable<TEntity> query = Context.Set<TEntity>().AsNoTracking();
+
+        if (predicate is not null)
+        {
+            query = query.Where(predicate);
+        }
+
+        query = query.ApplyIncludes(includes);
+
+        int totalCount = await query.CountAsync(cancellationToken);
+
+        if (orderBy is not null)
+        {
+            query = orderBy(query);
+        }
+
+        List<TEntity> items = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(cancellationToken);
+
+        return new PagedResult<TEntity>(items, totalCount, pageNumber, pageSize);
+    }
+
+
+public virtual async Task<bool> ExistsAsync(
         Expression<Func<TEntity, bool>> predicate,
         Expression<Func<TEntity, object>>[]? includes = default,
         CancellationToken cancellationToken = default)
@@ -154,7 +191,7 @@ public class Repository<TEntity> : IRepository<TEntity>
             .AsNoTracking()
             .FirstOrDefaultAsync(e => e.Id == id, cancellationToken)
             ?? throw new KeyNotFoundException($"Entity with ID {id} was not found.");
-
+        entity.Inactivate();
         Context.Attach(entity);
         Context.Set<TEntity>().Update(entity);
     }
@@ -170,6 +207,7 @@ public class Repository<TEntity> : IRepository<TEntity>
             TEntity? entity = await Context.Set<TEntity>().FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
             if (entity is not null)
             {
+                entity.Inactivate();
                 entities.Add(entity);
             }
         }
