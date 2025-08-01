@@ -40,4 +40,9 @@ public class Branch : Entity
     {
         Location = newLocation ?? throw new ArgumentNullException(nameof(newLocation));
     }
+
+    public void UpdateName(string name)
+    {
+        Name = name;
+    }
 }
