@@ -23,6 +23,10 @@ public class ConnectionStringProvider(IConfiguration configuration) : IConnectio
             .SetPassword(configuration.GetValueOrThrow<string>("Customers:Password"))
             .Build();
 
+ 
+
     public string Base =>
         configuration.GetConnectionStringOrThrow("BaseConnection");
+
+    public string Notifications => "throw new NotImplementedException()";
 }
