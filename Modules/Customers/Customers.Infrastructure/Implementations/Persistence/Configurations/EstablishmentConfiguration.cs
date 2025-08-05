@@ -18,12 +18,12 @@ public class EstablishmentConfiguration : IEntityTypeConfiguration<Establishment
 
         builder.OwnsOne(e => e.ContactInfo, ci =>
         {
-            ci.Property(c => c.PhoneNumber).IsRequired().HasMaxLength(20);
-            ci.Property(c => c.Email).HasMaxLength(100);
-            ci.Property(c => c.Website).HasMaxLength(100);
-            ci.Property(c => c.InstagramHandle).HasMaxLength(100);
-            ci.Property(c => c.FacebookHandle).HasMaxLength(100);
-            ci.Property(c => c.WhatsappNumber).HasMaxLength(20);
+            ci.Property(c => c.PhoneNumber).HasColumnName("PhoneNumber").IsRequired().HasMaxLength(20);
+            ci.Property(c => c.Email).HasColumnName("Email").HasMaxLength(100);
+            ci.Property(c => c.Website).HasColumnName("Website").HasMaxLength(100);
+            ci.Property(c => c.InstagramHandle).HasColumnName("InstagramHandle").HasMaxLength(100);
+            ci.Property(c => c.FacebookHandle).HasColumnName("FacebookHandle").HasMaxLength(100);
+            ci.Property(c => c.WhatsappNumber).HasColumnName("WhatsappNumber").HasMaxLength(20);
         });
 
         builder.Property(e => e.PhotoUrl)
