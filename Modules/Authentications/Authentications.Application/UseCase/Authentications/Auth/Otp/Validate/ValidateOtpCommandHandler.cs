@@ -38,8 +38,6 @@ public class ValidateOtpCommandHandler(
             return Result.Failure<AuthenticationDto>(AuthErrors.OtpExpired);
         }
 
-        AuthenticationDto authDto = await signInService.SignInAsync(user,cancellationToken);
-
-        return Result.Success(authDto);
+        return await signInService.SignInAsync(user,cancellationToken);
     }
 }

@@ -6,7 +6,7 @@ public sealed class SignUp : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost($"{Tags.Auth}/signup", async (
+        app.MapPost($"auth/signup", async (
             [FromBody] SignUpCommand command,
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>

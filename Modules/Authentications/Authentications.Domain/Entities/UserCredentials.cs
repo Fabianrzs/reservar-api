@@ -1,5 +1,5 @@
 ﻿using Authentications.Domain.ValueObjects;
-
+using PasswordGenerator;
 namespace Authentications.Domain.Entities;
 
 public class UserCredentials : Entity
@@ -26,6 +26,31 @@ public class UserCredentials : Entity
             ]
         };
     }
+
+    public static (UserCredentials Credentials, string PlainPassword) CreateWithGeneratedPassword(Guid userId, DateTime passwordSetAt)
+    {
+        var pwdGen = new Password(includeLowercase: true, includeUppercase: true, 
+            includeNumeric: true, includeSpecial: true, passwordLength: 12);
+
+        string plainPassword = pwdGen.Next();
+
+        var hashedPassword = HashedPassword.HashPassword(plainPassword);
+
+        var credentials = new UserCredentials
+        {
+            Id = Guid.NewGuid(),
+            UserId = userId,
+            CurrentPassword = hashedPassword,
+            PasswordSetAt = passwordSetAt,
+            PasswordHistory =
+            [
+                HashedPasswordHistory.From(hashedPassword, passwordSetAt)
+            ]
+        };
+
+        return (credentials, plainPassword);
+    }
+
 
     public void RotatePassword(HashedPassword newPassword, DateTime passwordSetAt)
     {

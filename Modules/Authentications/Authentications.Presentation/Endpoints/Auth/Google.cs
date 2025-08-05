@@ -12,12 +12,12 @@ public sealed class Google : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapGet($"{Tags.Auth}/google/login", async (HttpContext httpContext,
+        app.MapGet($"auth/google/login", async (HttpContext httpContext,
             [FromQuery] string? redirectUri) =>
         {
             var properties = new AuthenticationProperties
             {
-                RedirectUri = $"api/{Tags.Auth}/google/callback"
+                RedirectUri = $"api/auth/google/callback"
             };
 
             properties.Items["redirectUri"] = redirectUri;
@@ -30,7 +30,7 @@ public sealed class Google : IEndpoint
         .AllowAnonymous()
         .WithTags(Tags.Auth);
 
-        app.MapGet($"{Tags.Auth}/google/callback", async (
+        app.MapGet($"auth/google/callback", async (
             HttpContext httpContext,[FromServices] ISender sender,
             CancellationToken cancellationToken) =>
         {

@@ -2,6 +2,8 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" />
+	  <PackageReference Include="PasswordGenerator" />
+
   </ItemGroup>
 
   <ItemGroup>

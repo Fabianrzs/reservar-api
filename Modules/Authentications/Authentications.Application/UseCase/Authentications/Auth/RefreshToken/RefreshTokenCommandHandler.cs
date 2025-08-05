@@ -15,14 +15,12 @@ public class RefreshTokenCommandHandler(
     public async Task<Result<RefreshTokenDto>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
         User? user = await userRepository.GetByIdAsync(userContext.Id, cancellationToken: cancellationToken);
+
         if (user is null)
         {
             return Result.Failure<RefreshTokenDto>(AuthErrors.SessionNotFound);
         }
 
-        RefreshTokenDto dto = await 
-            refreshTokenService.RefreshTokenAsync(user, userContext.SessionId, cancellationToken);
-
-        return Result.Success(dto);
+        return await refreshTokenService.RefreshTokenAsync(user, userContext.SessionId, cancellationToken);
     }
 }

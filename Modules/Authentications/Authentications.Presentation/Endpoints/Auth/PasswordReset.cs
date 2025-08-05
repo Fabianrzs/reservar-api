@@ -9,7 +9,7 @@ public sealed class PasswordResetEndpoints : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost($"{Tags.Auth}/password/request", async (
+        app.MapPost($"auth/password/request", async (
             [FromBody] PasswordResetRequestCommand command,
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>
@@ -20,7 +20,7 @@ public sealed class PasswordResetEndpoints : IEndpoint
         .AllowAnonymous()
         .WithTags(Tags.Auth);
 
-        app.MapPost($"{Tags.Auth}/password/validate", async (
+        app.MapPost($"auth/password/validate", async (
             [FromBody] ValidatePasswordResetTokenCommand command,
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>
@@ -31,7 +31,7 @@ public sealed class PasswordResetEndpoints : IEndpoint
         .AllowAnonymous()
         .WithTags(Tags.Auth);
 
-        app.MapPost($"{Tags.Auth}/password/change", async (
+        app.MapPost($"auth/password/change", async (
             [FromBody] ChangePasswordCommand command,
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>

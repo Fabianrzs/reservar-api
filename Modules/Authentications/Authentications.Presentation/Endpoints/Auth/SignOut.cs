@@ -6,7 +6,7 @@ public sealed class SignOut : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost($"{Tags.Auth}/signout", async (
+        app.MapPost($"auth/signout", async (
             [FromBody] SignOutCommand command,
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>

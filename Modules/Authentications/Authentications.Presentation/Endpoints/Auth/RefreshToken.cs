@@ -8,7 +8,7 @@ public sealed class RefreshToken : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost($"{Tags.Auth}/refresh-token", async (
+        app.MapPost($"auth/refresh-token", async (
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>
         {

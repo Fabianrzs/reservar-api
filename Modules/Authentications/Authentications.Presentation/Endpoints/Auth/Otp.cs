@@ -8,7 +8,7 @@ public sealed class Otp : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost($"{Tags.Auth}/otp/request", async (
+        app.MapPost($"auth/otp/request", async (
             [FromBody] RequestOtpCommand command,
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>
@@ -20,7 +20,7 @@ public sealed class Otp : IEndpoint
         .AllowAnonymous()
         .WithTags(Tags.Auth);
 
-        app.MapPost($"{Tags.Auth}/otp/validate", async (
+        app.MapPost($"auth/otp/validate", async (
             [FromBody] ValidateOtpCommand command,
             [FromServices] ISender sender,
             CancellationToken cancellationToken) =>

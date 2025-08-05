@@ -8,6 +8,9 @@
 
   <ItemGroup>
     <Folder Include="UseCase\Configutations\" />
-    <Folder Include="UseCase\Users\" />
+    <Folder Include="UseCase\Users\DeleteUsers\" />
+    <Folder Include="UseCase\Users\GetAllUsers\" />
+    <Folder Include="UseCase\Users\GetUserByEstablishment\" />
+    <Folder Include="UseCase\Users\UpdateUsers\" />
   </ItemGroup>
 </Project>

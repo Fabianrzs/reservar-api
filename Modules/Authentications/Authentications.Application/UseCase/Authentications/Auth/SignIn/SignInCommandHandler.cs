@@ -26,8 +26,6 @@ public class SignInCommandHandler(
             return Result.Failure<AuthenticationDto>(AuthErrors.InvalidCredentials);
         }
 
-        AuthenticationDto dto = await signInService.SignInAsync(user, cancellationToken);
-
-        return Result.Success(dto);
+        return await signInService.SignInAsync(user, cancellationToken);
     }
 }

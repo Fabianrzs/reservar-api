@@ -31,7 +31,6 @@ public class GoogleAuthCommandHandler(
             await userRepository.AddAsync(user, cancellationToken);
         }
 
-        AuthenticationDto authDto = await signInService.SignInAsync(user, cancellationToken);
-        return authDto;
+        return await signInService.SignInAsync(user, cancellationToken);
     }
 }
